@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import apiService from '../../services/api';
+import Spinner from '../Spinner';
 import Container from '../Container';
 
 class Reviews extends Component {
@@ -7,7 +8,7 @@ class Reviews extends Component {
     reviews: [],
     currentPage: 1,
     totalPages: 1,
-    // isLoading: false,
+    isLoading: false,
     error: null,
   };
 
@@ -19,7 +20,7 @@ class Reviews extends Component {
     const { movieId } = this.props.match.params;
     const { currentPage } = this.state;
     this.setState({
-      //   isLoading: true,
+      isLoading: true,
       error: null,
     });
 
@@ -38,14 +39,14 @@ class Reviews extends Component {
         this.setState({
           error,
         }),
-      );
-    //   .finally(() => {
-    //     this.setState({ isLoading: false });
-    //   });
+      )
+      .finally(() => {
+        this.setState({ isLoading: false });
+      });
   };
 
   render() {
-    const { reviews, currentPage, totalPages, error } = this.state;
+    const { reviews, currentPage, totalPages, isLoading, error } = this.state;
 
     const shouldRenderLoadMoreBtn =
       reviews.length > 0 && currentPage <= totalPages;
@@ -53,6 +54,7 @@ class Reviews extends Component {
     return (
       <section className="reviews">
         <Container>
+          {isLoading && <Spinner />}
           {reviews.length > 0 && (
             <ul>
               {reviews.map(({ id, author, content }) => (

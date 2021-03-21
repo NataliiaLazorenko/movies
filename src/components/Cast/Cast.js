@@ -2,26 +2,31 @@ import React, { Component } from 'react';
 // import PropTypes from 'prop-types';
 import apiService from '../../services/api';
 import Container from '../Container';
+import Spinner from '../Spinner';
 import defaultPhoto from './defaultPhoto.jpg';
 
 class MovieActors extends Component {
   state = {
     actors: [],
+    isLoading: false,
   };
 
   async componentDidMount() {
+    this.setState({ isLoading: true });
+
     const { movieId } = this.props.match.params;
     const actors = await apiService.fetchMovieActors(movieId);
 
-    this.setState({ actors });
+    this.setState({ actors, isLoading: false });
   }
 
   render() {
-    const { actors } = this.state;
+    const { actors, isLoading } = this.state;
 
     return (
       <section className="actors">
         <Container>
+          {isLoading && <Spinner />}
           <ul>
             {actors.map(({ profile_path, name, character, id }) => (
               <li key={id}>
