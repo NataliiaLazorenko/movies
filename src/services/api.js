@@ -18,7 +18,7 @@ const fetchMovieDetails = id => {
 const fetchMovieActors = id => {
   return axios
     .get(`/movie/${id}/credits?api_key=${apiKey}&language=en-US`)
-    .then(response => response.data);
+    .then(response => response.data.cast);
 };
 
 const fetchMovieReviews = (id, page) => {

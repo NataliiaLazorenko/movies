@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import apiService from '../../services/api';
+import Container from '../Container';
 
 class Reviews extends Component {
   state = {
@@ -50,22 +51,24 @@ class Reviews extends Component {
       reviews.length > 0 && currentPage <= totalPages;
 
     return (
-      <>
-        {reviews.length > 0 && (
-          <ul>
-            {reviews.map(({ id, author, content }) => (
-              <li key={id}>
-                <h3>Author: {author}</h3>
-                <p>{content}</p>
-              </li>
-            ))}
-          </ul>
-        )}
-        {shouldRenderLoadMoreBtn && (
-          <button onClick={this.fetchMovies}>Load more</button>
-        )}
-        {error && <p>{error}</p>}
-      </>
+      <section className="reviews">
+        <Container>
+          {reviews.length > 0 && (
+            <ul>
+              {reviews.map(({ id, author, content }) => (
+                <li key={id}>
+                  <h3>Author: {author}</h3>
+                  <p>{content}</p>
+                </li>
+              ))}
+            </ul>
+          )}
+          {shouldRenderLoadMoreBtn && (
+            <button onClick={this.fetchMovies}>Load more</button>
+          )}
+          {error && <p>{error}</p>}
+        </Container>
+      </section>
     );
   }
 }

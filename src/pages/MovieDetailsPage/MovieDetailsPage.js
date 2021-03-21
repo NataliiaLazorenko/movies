@@ -4,10 +4,13 @@ import { Route, NavLink } from 'react-router-dom';
 import apiService from '../../services/api';
 import Cast from '../../components/Cast';
 import Reviews from '../../components/Reviews';
+import Container from '../../components/Container';
+import { routes } from '../../routes';
 import defaultImage from './defaultImage.png';
-// import style from './MovieDetailsPage.module.css';
+import styles from './MovieDetailsPage.module.css';
 
 class MovieDetailsPage extends Component {
+  // можна відразу записувати потрібні властивості об'єкта
   state = {
     movieDetails: {},
   };
@@ -18,6 +21,17 @@ class MovieDetailsPage extends Component {
 
     this.setState({ movieDetails });
   }
+
+  handleGoBack = () => {
+    const { history, location } = this.props;
+
+    location.state && location.state.from
+      ? history.push(location.state.from)
+      : history.push(routes.home);
+
+    // Новий синтаксис з використанням optional chaining operator (?.) - поки погано транспайлиться
+    // history.push(location?.state?.from || routes.home);
+  };
 
   render() {
     const {
@@ -34,40 +48,53 @@ class MovieDetailsPage extends Component {
     return (
       Object.keys(this.state.movieDetails).length > 0 && (
         <>
-          <div>
-            <button type="button" onClick={this.props.history.goBack}>
-              Go back
-            </button>
-            {poster_path ? (
-              <img
-                src={`https://image.tmdb.org/t/p/w200${poster_path}`}
-                alt="Movie poster"
-              />
-            ) : (
-              <img src={defaultImage} alt="no poster available" width="200" />
-            )}
-            <h2>{`${title} (${release_date.split('-')[0]})`}</h2>
-            <p>User score: {vote_average * 10} %</p>
-            <h3>Overview</h3>
-            <p>{overview}</p>
-            <h3>Genres</h3>
-            <ul>
-              {genres.map(({ name }) => (
-                <li key={name}>{name}</li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <p>Additional information</p>
-            <ul>
-              <li>
-                <NavLink to={`${match.url}/cast`}>Cast</NavLink>
-              </li>
-              <li>
-                <NavLink to={`${match.url}/reviews`}>Reviews</NavLink>
-              </li>
-            </ul>
-          </div>
+          <section className="movieDetails">
+            <Container>
+              <div>
+                <button type="button" onClick={this.handleGoBack}>
+                  Go back
+                </button>
+                {poster_path ? (
+                  <img
+                    src={`https://image.tmdb.org/t/p/w200${poster_path}`}
+                    alt="Movie poster"
+                  />
+                ) : (
+                  <img
+                    src={defaultImage}
+                    alt="no poster available"
+                    width="200"
+                  />
+                )}
+              </div>
+              <div>
+                <h2>{`${title} (${release_date.split('-')[0]})`}</h2>
+                <p>User score: {vote_average * 10} %</p>
+                <h3>Overview</h3>
+                <p>{overview}</p>
+                <h3>Genres</h3>
+                <ul>
+                  {genres.map(({ name }) => (
+                    <li key={name}>{name}</li>
+                  ))}
+                </ul>
+              </div>
+            </Container>
+          </section>
+
+          <section className="AditionalInformation">
+            <Container>
+              <p>Additional information</p>
+              <ul>
+                <li>
+                  <NavLink to={`${match.url}/cast`}>Cast</NavLink>
+                </li>
+                <li>
+                  <NavLink to={`${match.url}/reviews`}>Reviews</NavLink>
+                </li>
+              </ul>
+            </Container>
+          </section>
 
           <Route path={`${match.path}/cast`} component={Cast} />
           <Route path={`${match.path}/reviews`} component={Reviews} />
@@ -107,3 +134,5 @@ export default MovieDetailsPage;
 // додати дефолтну сторінку
 // додати спінер
 // додати Load More для сторінки пошуку за ключовим словом
+// додати дефолтну сторінку
+// додати картку однієї книги

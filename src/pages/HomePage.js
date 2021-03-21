@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import apiService from '../services/api';
+import Container from '../components/Container';
+import MovieList from '../components/MovieList';
 
 class HomePage extends Component {
   state = {
@@ -17,16 +18,12 @@ class HomePage extends Component {
     const { movies } = this.state;
 
     return (
-      <>
-        <h1>Tranding today</h1>
-        <ul>
-          {movies.map(({ id, title }) => (
-            <li key={id}>
-              <Link to={`/movies/${id}`}>{title}</Link>
-            </li>
-          ))}
-        </ul>
-      </>
+      <section className="trend-movies">
+        <Container>
+          <h1>Tranding today</h1>
+          <MovieList movies={movies} />
+        </Container>
+      </section>
     );
   }
 }

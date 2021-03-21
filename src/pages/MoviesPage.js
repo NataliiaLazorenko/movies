@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import SearchBar from '../components/SearchBar';
 import apiService from '../services/api';
+import Container from '../components/Container';
+import MovieList from '../components/MovieList';
 
 class MoviesPage extends Component {
   state = {
@@ -31,19 +32,11 @@ class MoviesPage extends Component {
     const { movies, error } = this.state;
 
     return (
-      <>
+      <Container>
         <SearchBar onSubmit={this.onChangeQuery} />
-        {movies.length > 0 && (
-          <ul>
-            {movies.map(({ id, title }) => (
-              <li key={id}>
-                <Link to={`${this.props.match.url}/${id}`}>{title}</Link>
-              </li>
-            ))}
-          </ul>
-        )}
+        {movies.length > 0 && <MovieList movies={this.state.movies} />}
         {error && <p>{error}</p>}
-      </>
+      </Container>
     );
   }
 }
