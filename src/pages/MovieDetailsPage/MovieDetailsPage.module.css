@@ -1,16 +1,21 @@
+.movieDetails, .aditionalInformation {
+  border-bottom: 3px solid rgb(0, 0, 0, 0.2);
+}
+
 .container {
   display: flex;
 }
 
 .link {
   font-weight: 400;
-  color: inherit;
+  color: rgb(211, 97, 131);
 }
 
 .link:hover {
-  color: rgb(211, 97, 131);
+  color: rgb(192, 74, 110);
+  font-weight: 600;
 }
 
 .activeLink {
-  color: rgb(211, 97, 131);
+  color: rgb(192, 74, 110);
 }

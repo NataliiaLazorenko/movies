@@ -4,7 +4,7 @@ import styles from './Spinner.module.css';
 
 const Spinner = () => (
   <div className={styles.spinnerContainer}>
-    <Loader type="ThreeDots" color="#2196f3" height={80} width={80} />
+    <Loader type="ThreeDots" color="#3b021ff5" height={80} width={80} />
   </div>
 );
 

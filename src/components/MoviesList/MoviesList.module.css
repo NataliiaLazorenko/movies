@@ -1,0 +1,12 @@
+.movieLink{
+  color: rgb(109, 104, 104)
+}
+
+.movieLink:hover{
+  font-weight: 600;
+  color: rgb(224, 167, 184);
+}
+
+.moviesListItem:not(:last-child) {
+  margin-bottom: 6px;
+}

@@ -44,7 +44,7 @@ class MovieDetailsPage extends Component {
         {isLoading && <Spinner />}
         {movieDetails.title && (
           <>
-            <section className="movieDetails">
+            <section className={styles.movieDetails}>
               <Container>
                 <button
                   type="button"
@@ -57,7 +57,7 @@ class MovieDetailsPage extends Component {
               </Container>
             </section>
 
-            <section className="AditionalInformation">
+            <section className={styles.aditionalInformation}>
               <Container>
                 <h3>Additional information</h3>
                 <ul>

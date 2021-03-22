@@ -33,10 +33,6 @@ a {
   text-decoration: none;
 }
 
-section {
-  border-bottom: 3px solid rgb(0, 0, 0, 0.2);
-}
-
 .button {
   margin-bottom: 20px;
   padding: 8px 20px;

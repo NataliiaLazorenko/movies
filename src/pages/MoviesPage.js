@@ -3,7 +3,7 @@ import SearchBar from '../components/SearchBar';
 import apiService from '../services/api';
 import Spinner from '../components/Spinner';
 import Container from '../components/Container';
-import MovieList from '../components/MovieList';
+import MoviesList from '../components/MoviesList';
 
 class MoviesPage extends Component {
   state = {
@@ -58,7 +58,7 @@ class MoviesPage extends Component {
       <Container>
         <SearchBar onSubmit={this.onChangeQuery} />
         {isLoading && <Spinner />}
-        {movies.length > 0 && <MovieList movies={movies} />}
+        {movies.length > 0 && <MoviesList movies={movies} />}
         {error && <p>{error}</p>}
       </Container>
     );

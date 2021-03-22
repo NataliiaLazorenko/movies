@@ -14,13 +14,13 @@
 
 .link {
   text-decoration: none;
-  color: inherit;
+  color: #fff;
 }
 
 .link:hover {
-  color: rgb(211, 97, 131);
+  color: rgb(224, 167, 184);
 }
 
 .activeLink {
-  color: rgb(211, 97, 131);
+  color: rgb(224, 167, 184);
 }

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import apiService from '../services/api';
 import Spinner from '../components/Spinner';
 import Container from '../components/Container';
-import MovieList from '../components/MovieList';
+import MoviesList from '../components/MoviesList';
 
 class HomePage extends Component {
   state = {
@@ -26,7 +26,7 @@ class HomePage extends Component {
         <Container>
           <h1>Tranding today</h1>
           {isLoading && <Spinner />}
-          <MovieList movies={movies} />
+          <MoviesList movies={movies} />
         </Container>
       </section>
     );
