@@ -2,72 +2,40 @@ import React, { Component } from 'react';
 import apiService from '../../services/api';
 import Spinner from '../Spinner';
 import Container from '../Container';
+import ReviewsList from '../ReviewsList';
 
 class Reviews extends Component {
   state = {
     reviews: [],
-    currentPage: 1,
-    totalPages: 1,
     isLoading: false,
     error: null,
   };
 
   async componentDidMount() {
-    await this.fetchMovies();
-  }
-
-  fetchMovies = () => {
     const { movieId } = this.props.match.params;
-    const { currentPage } = this.state;
+
     this.setState({
       isLoading: true,
       error: null,
     });
 
-    apiService
-      .fetchMovieReviews(movieId, currentPage)
-      .then(({ results, total_pages }) => {
-        results.length > 0
-          ? this.setState(prevState => ({
-              reviews: [...prevState.reviews, ...results],
-              currentPage: prevState.currentPage + 1,
-              totalPages: total_pages,
-            }))
-          : this.setState({ error: 'We dont have any reviews for this movie' });
-      })
-      .catch(error =>
-        this.setState({
-          error,
-        }),
-      )
-      .finally(() => {
-        this.setState({ isLoading: false });
-      });
-  };
+    const reviews = await apiService.fetchMovieReviews(movieId);
+
+    reviews.length > 0
+      ? this.setState({ reviews })
+      : this.setState({ error: 'We dont have any reviews for this movie' });
+
+    this.setState({ isLoading: false });
+  }
 
   render() {
-    const { reviews, currentPage, totalPages, isLoading, error } = this.state;
-
-    const shouldRenderLoadMoreBtn =
-      reviews.length > 0 && currentPage <= totalPages;
+    const { reviews, isLoading, error } = this.state;
 
     return (
       <section className="reviews">
         <Container>
           {isLoading && <Spinner />}
-          {reviews.length > 0 && (
-            <ul>
-              {reviews.map(({ id, author, content }) => (
-                <li key={id}>
-                  <h3>Author: {author}</h3>
-                  <p>{content}</p>
-                </li>
-              ))}
-            </ul>
-          )}
-          {shouldRenderLoadMoreBtn && (
-            <button onClick={this.fetchMovies}>Load more</button>
-          )}
+          {reviews.length > 0 && <ReviewsList reviews={reviews} />}
           {error && <p>{error}</p>}
         </Container>
       </section>

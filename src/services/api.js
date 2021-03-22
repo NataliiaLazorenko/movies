@@ -21,10 +21,10 @@ const fetchMovieActors = id => {
     .then(response => response.data.cast);
 };
 
-const fetchMovieReviews = (id, page) => {
+const fetchMovieReviews = id => {
   return axios
-    .get(`/movie/${id}/reviews?api_key=${apiKey}&language=en-US&page=${page}`)
-    .then(response => response.data);
+    .get(`/movie/${id}/reviews?api_key=${apiKey}&language=en-US`)
+    .then(response => response.data.results);
 };
 
 const fetchByKeyWord = query => {

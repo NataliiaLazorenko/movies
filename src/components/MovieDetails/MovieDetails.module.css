@@ -1,0 +1,18 @@
+.movieDetails {
+  display: flex;
+}
+
+.moviePoster {
+  width: 300px;
+  margin-right: 20px;
+}
+
+.movieGenres {
+  display: flex;
+  list-style: none;
+  padding: 0;
+}
+
+.movieGenresItem:not(:last-child) {
+  margin-right: 20px;
+}

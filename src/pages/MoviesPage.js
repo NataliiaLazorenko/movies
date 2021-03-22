@@ -13,12 +13,33 @@ class MoviesPage extends Component {
     error: null,
   };
 
+  async componentDidMount() {
+    const { search } = this.props.location;
+    const { query } = this.state;
+
+    if (search === '' && query === '') return;
+
+    this.setState({ isLoading: true });
+
+    const prevQuery = search.slice(7, 10);
+    const { results } = await apiService.fetchByKeyWord(prevQuery);
+
+    this.setState({ movies: results, isLoading: false });
+  }
+
   async componentDidUpdate(ptrevProp, prevState) {
-    if (prevState.query !== this.state.query) {
+    const { query } = this.state;
+
+    if (prevState.query !== query) {
       this.setState({ isLoading: true, error: null });
 
-      const { results } = await apiService.fetchByKeyWord(this.state.query);
+      const { results } = await apiService.fetchByKeyWord(query);
+      const { history } = this.props;
+
       this.setState({ movies: results, isLoading: false });
+      history.push({
+        search: `query=${query}`,
+      });
 
       if (results.length === 0) {
         this.setState({ error: 'Nothing was found, specify your query' });

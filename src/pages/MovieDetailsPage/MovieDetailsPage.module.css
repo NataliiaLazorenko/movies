@@ -1,3 +1,16 @@
 .container {
   display: flex;
 }
+
+.link {
+  font-weight: 400;
+  color: inherit;
+}
+
+.link:hover {
+  color: rgb(211, 97, 131);
+}
+
+.activeLink {
+  color: rgb(211, 97, 131);
+}

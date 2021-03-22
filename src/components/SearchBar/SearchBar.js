@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import styles from './SearchBar.module.css';
 
 class SearchBar extends Component {
   state = {
@@ -13,8 +14,11 @@ class SearchBar extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
+    const { query } = this.state;
 
-    this.props.onSubmit(this.state.query);
+    if (query === '') return;
+
+    this.props.onSubmit(query);
     this.reset();
   };
 
@@ -35,8 +39,11 @@ class SearchBar extends Component {
           autoFocus
           onChange={this.handleInputChange}
           value={query}
+          className={styles.inputField}
         />
-        <button type="submit">Search</button>
+        <button type="submit" className="button">
+          Search
+        </button>
       </form>
     );
   }

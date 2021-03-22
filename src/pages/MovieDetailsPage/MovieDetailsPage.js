@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Route, NavLink } from 'react-router-dom';
-// import PropTypes from 'prop-types';
 import apiService from '../../services/api';
 import Spinner from '../../components/Spinner';
 import MovieDetails from '../../components/MovieDetails';
@@ -21,7 +20,7 @@ class MovieDetailsPage extends Component {
 
     const { movieId } = this.props.match.params;
     const movieDetails = await apiService.fetchMovieDetails(movieId);
-    console.log('movieDetails:', movieDetails);
+
     this.setState({ movieDetails, isLoading: false });
   }
 
@@ -47,7 +46,11 @@ class MovieDetailsPage extends Component {
           <>
             <section className="movieDetails">
               <Container>
-                <button type="button" onClick={this.handleGoBack}>
+                <button
+                  type="button"
+                  onClick={this.handleGoBack}
+                  className="button"
+                >
                   Go back
                 </button>
                 <MovieDetails movieDetails={movieDetails} />
@@ -56,13 +59,25 @@ class MovieDetailsPage extends Component {
 
             <section className="AditionalInformation">
               <Container>
-                <p>Additional information</p>
+                <h3>Additional information</h3>
                 <ul>
                   <li>
-                    <NavLink to={`${match.url}/cast`}>Cast</NavLink>
+                    <NavLink
+                      to={`${match.url}/cast`}
+                      className={styles.link}
+                      activeClassName={styles.activeLink}
+                    >
+                      Cast
+                    </NavLink>
                   </li>
                   <li>
-                    <NavLink to={`${match.url}/reviews`}>Reviews</NavLink>
+                    <NavLink
+                      to={`${match.url}/reviews`}
+                      className={styles.link}
+                      activeClassName={styles.activeLink}
+                    >
+                      Reviews
+                    </NavLink>
                   </li>
                 </ul>
               </Container>
@@ -79,35 +94,4 @@ class MovieDetailsPage extends Component {
   }
 }
 
-// MovieDetailsPage.defaultProps = {
-//   poster_path: defaultImage,
-//   overview: '',
-// };
-
-// MovieDetailsPage.propTypes = {
-//   movieDetails: PropTypes.shape({
-//     poster_path: PropTypes.string,
-//     title: PropTypes.string.isRequired,
-//     release_date: PropTypes.string.isRequired,
-//     vote_average: PropTypes.number.isRequired,
-//     overview: PropTypes.string,
-//     genres: PropTypes.arrayOf(
-//       PropTypes.shape({
-//         id: PropTypes.number.isRequired,
-//         name: PropTypes.string.isRequired,
-//       }),
-//     ).isRequired,
-//   }),
-// };
-
 export default MovieDetailsPage;
-
-// додати дефолтне зображення і інші дефолтні значення
-// описати propTypes
-// замінити перевірку Object.keys
-// додати try catch
-// додати дефолтну сторінку
-// додати спінер
-// додати Load More для сторінки пошуку за ключовим словом
-// додати дефолтну сторінку
-// додати картку однієї книги
