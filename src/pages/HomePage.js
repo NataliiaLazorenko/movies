@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import apiService from '../services/api';
+import { fetchTrends } from '../services/api';
 import Spinner from '../components/Spinner';
 import Container from '../components/Container';
 import MoviesList from '../components/MoviesList';
@@ -13,9 +13,15 @@ class HomePage extends Component {
   async componentDidMount() {
     this.setState({ isLoading: true });
 
-    const movies = await apiService.fetchTrends();
+    try {
+      const movies = await fetchTrends();
 
-    this.setState({ movies, isLoading: false });
+      this.setState({ movies });
+    } catch (error) {
+      console.log(error); // замінити на нотифікацію
+    }
+
+    this.setState({ isLoading: false });
   }
 
   render() {

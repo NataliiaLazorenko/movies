@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route, NavLink } from 'react-router-dom';
-import apiService from '../../services/api';
+import { fetchMovieDetails } from '../../services/api';
 import Spinner from '../../components/Spinner';
 import MovieDetails from '../../components/MovieDetails';
 import Cast from '../../components/Cast';
@@ -19,9 +19,16 @@ class MovieDetailsPage extends Component {
     this.setState({ isLoading: true });
 
     const { movieId } = this.props.match.params;
-    const movieDetails = await apiService.fetchMovieDetails(movieId);
 
-    this.setState({ movieDetails, isLoading: false });
+    try {
+      const movieDetails = await fetchMovieDetails(movieId);
+
+      this.setState({ movieDetails });
+    } catch (error) {
+      this.setState({ error }); // замінити на нотифікацію
+    }
+
+    this.setState({ isLoading: false });
   }
 
   handleGoBack = () => {

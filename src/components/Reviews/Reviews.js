@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import apiService from '../../services/api';
+import { fetchMovieReviews } from '../../services/api';
 import Spinner from '../Spinner';
 import Container from '../Container';
 import ReviewsList from '../ReviewsList';
@@ -19,11 +19,15 @@ class Reviews extends Component {
       error: null,
     });
 
-    const reviews = await apiService.fetchMovieReviews(movieId);
+    try {
+      const reviews = await fetchMovieReviews(movieId);
 
-    reviews.length > 0
-      ? this.setState({ reviews })
-      : this.setState({ error: 'We dont have any reviews for this movie' });
+      reviews.length > 0
+        ? this.setState({ reviews })
+        : this.setState({ error: 'We dont have any reviews for this movie' });
+    } catch (error) {
+      console.log(error); // замінити на нотифікацію
+    }
 
     this.setState({ isLoading: false });
   }

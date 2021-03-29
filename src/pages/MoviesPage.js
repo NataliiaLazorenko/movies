@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import SearchBar from '../components/SearchBar';
-import apiService from '../services/api';
+import { fetchByKeyWord } from '../services/api';
 import Spinner from '../components/Spinner';
 import Container from '../components/Container';
 import MoviesList from '../components/MoviesList';
@@ -22,28 +22,40 @@ class MoviesPage extends Component {
     this.setState({ isLoading: true });
 
     const prevQuery = search.slice(7, 10);
-    const { results } = await apiService.fetchByKeyWord(prevQuery);
 
-    this.setState({ movies: results, isLoading: false });
+    try {
+      const { results } = await fetchByKeyWord(prevQuery);
+      this.setState({ movies: results });
+    } catch (error) {
+      console.log(error); // замінити на нотифікацію
+    }
+
+    this.setState({ isLoading: false });
   }
 
-  async componentDidUpdate(ptrevProp, prevState) {
+  async componentDidUpdate(prevProp, prevState) {
     const { query } = this.state;
 
     if (prevState.query !== query) {
       this.setState({ isLoading: true, error: null });
 
-      const { results } = await apiService.fetchByKeyWord(query);
-      const { history } = this.props;
+      try {
+        const { results } = await fetchByKeyWord(query);
+        this.setState({ movies: results });
 
-      this.setState({ movies: results, isLoading: false });
+        if (results.length === 0) {
+          this.setState({ error: 'Nothing was found, specify your query' });
+        }
+      } catch (error) {
+        console.log(error); // замінити на нотифікацію
+      }
+
+      this.setState({ isLoading: false });
+
+      const { history } = this.props;
       history.push({
         search: `query=${query}`,
       });
-
-      if (results.length === 0) {
-        this.setState({ error: 'Nothing was found, specify your query' });
-      }
     }
   }
 

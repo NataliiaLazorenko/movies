@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import apiService from '../../services/api';
+import { fetchMovieActors } from '../../services/api';
 import Container from '../Container';
 import Spinner from '../Spinner';
 import ActorsList from '../../components/ActorsList';
@@ -14,9 +14,15 @@ class MovieActors extends Component {
     this.setState({ isLoading: true });
 
     const { movieId } = this.props.match.params;
-    const actors = await apiService.fetchMovieActors(movieId);
 
-    this.setState({ actors, isLoading: false });
+    try {
+      const actors = await fetchMovieActors(movieId);
+      this.setState({ actors });
+    } catch (error) {
+      console.log(error); // замінити на нотифікацію
+    }
+
+    this.setState({ isLoading: false });
   }
 
   render() {
