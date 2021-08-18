@@ -3,7 +3,7 @@
   list-style: none;
   padding: 0;
   margin: 0;
-  font-size: 26px;
+  font-size: 20px;
   font-weight: 700;
 }
 
@@ -23,4 +23,22 @@
 
 .activeLink {
   color: rgb(224, 167, 184);
+}
+
+@media screen and (min-width: 420px) {
+  .navigationList {
+    font-size: 22px;
+  }
+}
+
+@media screen and (min-width: 780px) {
+  .navigationList {
+    font-size: 24px;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .navigationList {
+    font-size: 26px;
+  }
 }

@@ -1,9 +1,14 @@
-.movieDetails, .aditionalInformation {
-  border-bottom: 3px solid rgb(0, 0, 0, 0.2);
+.goBackButton {
+  margin-bottom: 20px;
 }
 
-.container {
-  display: flex;
+.listTitle {
+  margin-bottom: 20px;
+}
+
+.movieDetails,
+.aditionalInformation {
+  border-bottom: 3px solid rgb(0, 0, 0, 0.2);
 }
 
 .link {

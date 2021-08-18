@@ -17,7 +17,7 @@ const ActorsList = ({ actors }) => (
         )}
         <div className={styles.actorDetails}>
           <h3 className={styles.actorName}>{name}</h3>
-          <p className={styles.actorCharacter}>Character: {character}</p>
+          <p>Character: {character}</p>
         </div>
       </li>
     ))}

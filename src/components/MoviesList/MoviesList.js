@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link, withRouter } from 'react-router-dom';
 import { routes } from '../../routes';
-import styles from './MoviesList.module.css'
+import styles from './MoviesList.module.css';
 
 const MoviesList = ({ movies, location }) => (
-  <ul >
+  <ul className={styles.movieList}>
     {movies.map(({ id, title }) => (
       <li key={id} className={styles.moviesListItem}>
         <Link

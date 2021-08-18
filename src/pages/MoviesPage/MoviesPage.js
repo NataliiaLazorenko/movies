@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import SearchBar from '../components/SearchBar';
-import { fetchByKeyWord } from '../services/api';
-import Spinner from '../components/Spinner';
-import Container from '../components/Container';
-import MoviesList from '../components/MoviesList';
+import { fetchByKeyWord } from '../../services/api';
+import SearchBar from '../../components/SearchBar';
+import Spinner from '../../components/Spinner';
+import Container from '../../components/Container';
+import MoviesList from '../../components/MoviesList';
+import styles from './MoviesPage.module.css';
 
 class MoviesPage extends Component {
   state = {
@@ -27,7 +28,7 @@ class MoviesPage extends Component {
       const { results } = await fetchByKeyWord(prevQuery);
       this.setState({ movies: results });
     } catch (error) {
-      console.log(error); // замінити на нотифікацію
+      console.log(error);
     }
 
     this.setState({ isLoading: false });
@@ -47,7 +48,7 @@ class MoviesPage extends Component {
           this.setState({ error: 'Nothing was found, specify your query' });
         }
       } catch (error) {
-        console.log(error); // замінити на нотифікацію
+        console.log(error);
       }
 
       this.setState({ isLoading: false });
@@ -71,7 +72,7 @@ class MoviesPage extends Component {
         <SearchBar onSubmit={this.onChangeQuery} />
         {isLoading && <Spinner />}
         {movies.length > 0 && <MoviesList movies={movies} />}
-        {error && <p>{error}</p>}
+        {error && <p className={styles.errorMessage}>{error}</p>}
       </Container>
     );
   }

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { fetchMovieActors } from '../../services/api';
 import Container from '../Container';
 import Spinner from '../Spinner';
-import ActorsList from '../../components/ActorsList';
+import ActorsList from '../ActorsList';
 
 class MovieActors extends Component {
   state = {
@@ -19,7 +19,7 @@ class MovieActors extends Component {
       const actors = await fetchMovieActors(movieId);
       this.setState({ actors });
     } catch (error) {
-      console.log(error); // замінити на нотифікацію
+      console.log(error);
     }
 
     this.setState({ isLoading: false });

@@ -1,8 +1,12 @@
-.movieLink{
-  color: rgb(109, 104, 104)
+.movieList {
+  margin-top: 20px;
 }
 
-.movieLink:hover{
+.movieLink {
+  color: rgb(109, 104, 104);
+}
+
+.movieLink:hover {
   font-weight: 600;
   color: rgb(224, 167, 184);
 }

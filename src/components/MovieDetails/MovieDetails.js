@@ -31,9 +31,9 @@ const MovieDetails = ({ movieDetails }) => {
       )}
       <div>
         <h2>{`${title} (${release_date.split('-')[0]})`}</h2>
-        <p>User score: {vote_average * 10} %</p>
+        <p className={styles.text}>User score: {vote_average * 10} %</p>
         <h3>Overview</h3>
-        <p>{overview}</p>
+        <p className={styles.text}>{overview}</p>
         <h3>Genres</h3>
         <ul className={styles.movieGenres}>
           {genres.map(({ name }) => (

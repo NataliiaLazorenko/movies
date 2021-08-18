@@ -25,7 +25,7 @@ class MovieDetailsPage extends Component {
 
       this.setState({ movieDetails });
     } catch (error) {
-      this.setState({ error }); // замінити на нотифікацію
+      this.setState({ error });
     }
 
     this.setState({ isLoading: false });
@@ -56,7 +56,7 @@ class MovieDetailsPage extends Component {
                 <button
                   type="button"
                   onClick={this.handleGoBack}
-                  className="button"
+                  className={`button ${styles.goBackButton}`}
                 >
                   Go back
                 </button>
@@ -66,7 +66,7 @@ class MovieDetailsPage extends Component {
 
             <section className={styles.aditionalInformation}>
               <Container>
-                <h3>Additional information</h3>
+                <h3 className={styles.listTitle}>Additional information</h3>
                 <ul>
                   <li>
                     <NavLink

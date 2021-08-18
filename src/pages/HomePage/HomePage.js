@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { fetchTrends } from '../services/api';
-import Spinner from '../components/Spinner';
-import Container from '../components/Container';
-import MoviesList from '../components/MoviesList';
+import { fetchTrends } from '../../services/api';
+import Spinner from '../../components/Spinner';
+import Container from '../../components/Container';
+import MoviesList from '../../components/MoviesList';
+import styles from './HomePage.module.css';
 
 class HomePage extends Component {
   state = {
@@ -18,7 +19,7 @@ class HomePage extends Component {
 
       this.setState({ movies });
     } catch (error) {
-      console.log(error); // замінити на нотифікацію
+      console.log(error);
     }
 
     this.setState({ isLoading: false });
@@ -30,7 +31,7 @@ class HomePage extends Component {
     return (
       <section className="trend-movies">
         <Container>
-          <h1>Tranding today</h1>
+          <h1 className={styles.title}>Trending today</h1>
           {isLoading && <Spinner />}
           <MoviesList movies={movies} />
         </Container>

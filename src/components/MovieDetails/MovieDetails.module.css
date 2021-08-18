@@ -1,18 +1,44 @@
-.movieDetails {
-  display: flex;
+.moviePoster {
+  width: 200px;
+  height: 100%;
+  margin-right: 20px;
 }
 
-.moviePoster {
-  width: 300px;
-  margin-right: 20px;
+.text {
+  margin-bottom: 20px;
 }
 
 .movieGenres {
   display: flex;
+  flex-wrap: wrap;
   list-style: none;
   padding: 0;
 }
 
 .movieGenresItem:not(:last-child) {
   margin-right: 20px;
+}
+
+@media screen and (max-width: 419px) {
+  .moviePoster {
+    margin-bottom: 20px;
+  }
+}
+
+@media screen and (min-width: 420px) {
+  .movieDetails {
+    display: flex;
+  }
+}
+
+@media screen and (min-width: 780px) {
+  .moviePoster {
+    width: 250px;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .moviePoster {
+    width: 300px;
+  }
 }

@@ -24,9 +24,9 @@ class Reviews extends Component {
 
       reviews.length > 0
         ? this.setState({ reviews })
-        : this.setState({ error: 'We dont have any reviews for this movie' });
+        : this.setState({ error: 'There are no reviews for this movie yet' });
     } catch (error) {
-      console.log(error); // замінити на нотифікацію
+      console.log(error);
     }
 
     this.setState({ isLoading: false });

@@ -14,7 +14,7 @@ const MoviesPage = lazy(() =>
 
 const MovieDetailsPage = lazy(() =>
   import(
-    './pages/MovieDetailsPage/MovieDetailsPage' /* webpackChunkName: 'movie-details-page' */
+    './pages/MovieDetailsPage' /* webpackChunkName: 'movie-details-page' */
   ),
 );
 
@@ -23,14 +23,16 @@ const App = () => {
     <>
       <AppBar />
 
-      <Suspense fallback={<Spinner />}>
-        <Switch>
-          <Route exact path={routes.home} component={HomePage} />
-          <Route path={routes.movieDetails} component={MovieDetailsPage} />
-          <Route path={routes.movies} component={MoviesPage} />
-          <Redirect to={routes.home} />
-        </Switch>
-      </Suspense>
+      <main>
+        <Suspense fallback={<Spinner />}>
+          <Switch>
+            <Route exact path={routes.home} component={HomePage} />
+            <Route path={routes.movieDetails} component={MovieDetailsPage} />
+            <Route path={routes.movies} component={MoviesPage} />
+            <Redirect to={routes.home} />
+          </Switch>
+        </Suspense>
+      </main>
     </>
   );
 };
